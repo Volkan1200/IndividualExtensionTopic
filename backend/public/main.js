@@ -1,4 +1,282 @@
 // main.js
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const translations = {
+    en: {
+      // Navigation
+      home: "Home",
+      favorites: "Favorites",
+      playlists: "Playlists",
+      stats: "Stats",
+      settings: "Settings",
+
+      yourMusixLibrary: "Your Musix Library",
+      searchPlaceholder: "What do you want to listen to?",
+      library: "LIBRARY",
+      account: "ACCOUNT",
+
+      logoutHeading: "Log out",
+      logoutDescription: "Sign out from your account on this device.",
+
+      titleHeader: "TITLE",
+      artistHeader: "ARTIST",
+
+      addNewSong: "Add a new song",
+      mp3Helper: "To find MP3 links click",
+      here: "here",
+      noSongSelected: "No song selected",
+      
+      // Buttons
+      addSong: "+ Add Song",
+      saveSong: "Save song",
+      cancel: "Cancel",
+      logout: "Log out",
+      createPlaylist: "Create playlist",
+      newPlaylist: "New playlist",
+      addSongs: "Add songs",
+      goToLibrary: "Go to library",
+      
+      // Form labels
+      title: "Title",
+      artist: "Artist",
+      year: "Year",
+      genre: "Genre",
+      duration: "Duration (seconds)",
+      url: "Song URL (MP3 link)",
+      name: "Name",
+      description: "Description",
+      
+      // Messages
+      noSongs: "No songs in your library.",
+      playlistNameRequired: "Playlist name required",
+      fieldsRequired: "Title, artist, duration and url required",
+      durationPositive: "Duration must be a positive number of seconds",
+      selectPlaylist: "Select a playlist",
+      choosePlaylist: "Choose one of your playlists on the left to see its songs here.",
+      playlistEmpty: "This playlist is empty.",
+      noPlaylists: "You haven't created any playlists yet.",
+      
+      // Stats/Cards
+      totalSongs: "Total songs",
+      totalDuration: "Total duration",
+      favoriteSongs: "Favorite songs",
+      songsInLibrary: "Songs in your library",
+      combinedPlayback: "Combined playback time",
+      markedFavorites: "Marked as favorites",
+      
+      // Favorites
+      favoriteTitle: "Favorite Songs",
+      favoriteSubtitle: "Your most loved tracks in one place.",
+      noFavoritesYet: "No favorite songs yet",
+      markWithHeart: "Mark songs with the heart icon to save them here.",
+      
+      // Settings
+      settingsTitle: "Settings",
+      settingsSubtitle: "Customize how your music library looks and behaves.",
+      account: "Account",
+      manageSession: "Manage your Musix session.",
+      signOut: "Sign out from your account on this device.",
+      theme: "Theme",
+      chooseMood: "Choose the mood of your player.",
+      language: "Language",
+      chooseLanguage: "Choose your preferred language.",
+      
+      // Table headers
+      yearHeader: "Year",
+      genreHeader: "Genre",
+      durationHeader: "Duration",
+      
+      // Playlists
+      yourPlaylists: "Your playlists",
+      playlistsSubtitle: "Create custom playlists and group your favourite tracks by mood, activity or genre.",
+      collections: "Collections",
+      choosePlaylistCaption: "Choose a playlist to see its songs.",
+      
+      // Stats view
+      libraryStats: "Library stats",
+      statsOverview: "Overview of your songs, favorites, genres and artists.",
+      allTime: "All time"
+    },
+    dk: {
+      // Navigation
+      home: "Hjem",
+      favorites: "Favoritter",
+      playlists: "Afspilningslister",
+      stats: "Statistik",
+      settings: "Indstillinger",
+      
+      // Buttons
+      addSong: "+ Tilføj sang",
+      saveSong: "Gem sang",
+      cancel: "Annuller",
+      logout: "Log ud",
+      createPlaylist: "Opret afspilningsliste",
+      newPlaylist: "Ny afspilningsliste",
+      addSongs: "Tilføj sange",
+      goToLibrary: "Gå til bibliotek",
+      
+      // Form labels
+      title: "Titel",
+      artist: "Kunstner",
+      year: "År",
+      genre: "Genre",
+      duration: "Varighed (sekunder)",
+      url: "Sang URL (MP3 link)",
+      name: "Navn",
+      description: "Beskrivelse",
+      
+      // Messages
+      noSongs: "Ingen sange i dit bibliotek.",
+      playlistNameRequired: "Afspilningslistenavn påkrævet",
+      fieldsRequired: "Titel, kunstner, varighed og url påkrævet",
+      durationPositive: "Varigheden skal være et positivt antal sekunder",
+      selectPlaylist: "Vælg en afspilningsliste",
+      choosePlaylist: "Vælg en af dine afspilningslister til venstre for at se dens sange her.",
+      playlistEmpty: "Denne afspilningsliste er tom.",
+      noPlaylists: "Du har ikke oprettet nogen afspilningslister endnu.",
+      
+      // Stats/Cards
+      totalSongs: "Samlet antal sange",
+      totalDuration: "Samlet varighed",
+      favoriteSongs: "Favoritsange",
+      songsInLibrary: "Sange i dit bibliotek",
+      combinedPlayback: "Samlet afspilningstid",
+      markedFavorites: "Markeret som favoritter",
+      
+      // Favorites
+      favoriteTitle: "Favoritsange",
+      favoriteSubtitle: "Dine mest elskede numre på ét sted.",
+      noFavoritesYet: "Ingen favoritsange endnu",
+      markWithHeart: "Marker sange med hjerteikonet for at gemme dem her.",
+      
+      // Settings
+      settingsTitle: "Indstillinger",
+      settingsSubtitle: "Tilpas, hvordan dit musikbibliotek ser ud og opfører sig.",
+      account: "Konto",
+      manageSession: "Administrer din Musix-session.",
+      signOut: "Log ud fra din konto på denne enhed.",
+      theme: "Tema",
+      chooseMood: "Vælg stemningen for din afspiller.",
+      language: "Sprog",
+      chooseLanguage: "Vælg dit foretrukne sprog.",
+      noSongSelected: "Ingen sang valgt",
+
+      titleHeader: "TITEL",
+      artistHeader: "KUNSTNER",
+      
+      // Table headers
+      yearHeader: "År",
+      genreHeader: "Genre",
+      durationHeader: "Varighed",
+      
+      // Playlists
+      yourPlaylists: "Dine afspilningslister",
+      playlistsSubtitle: "Opret tilpassede afspilningslister og grupper dine yndlingsnumre efter stemning, aktivitet eller genre.",
+      collections: "Samlinger",
+      choosePlaylistCaption: "Vælg en afspilningsliste for at se dens sange.",
+      
+      // Stats view
+      libraryStats: "Biblioteksstatistikker",
+      statsOverview: "Oversigt over dine sange, favoritter, genrer og kunstnere.",
+      allTime: "Alle tider",
+
+      // Stats detail cards (add after "allTime")
+      mostCommonGenre: "Most common genre",
+      mostFrequentStyle: "Your most frequent music style.",
+      aboutPercent: "About 60% of your library",
+      byGenre: "By genre",
+      averageSongLength: "Average song length",
+      typicalDuration: "Typical track duration across your songs.",
+      acrossLibrary: "Across your library",
+      totalArtists: "Total artists",
+      howManyArtists: "How many unique artists you listen to.",
+      uniqueArtists: "Unique artists in your songs",
+
+      // Stats detail cards
+      mostCommonGenre: "Mest almindelige genre",
+      mostFrequentStyle: "Din mest hyppige musikstil.",
+      aboutPercent: "Omkring 60% af dit bibliotek",
+      byGenre: "Efter genre",
+      averageSongLength: "Gennemsnitlig sanglængde",
+      typicalDuration: "Typisk sporlængde på tværs af dine sange.",
+      acrossLibrary: "På tværs af dit bibliotek",
+      totalArtists: "Samlet kunstnere",
+      howManyArtists: "Hvor mange unikke kunstnere du lytter til.",
+      uniqueArtists: "Unikke kunstnere i dine sange",
+
+      logoutHeading: "Log ud",
+      logoutDescription: "Log ud fra din konto på denne enhed.",
+      
+      addNewSong: "Tilføj en ny sang",
+      mp3Helper: "For at finde MP3-links klik",
+      here: "her",
+
+      yourMusixLibrary: "Dit Musix Bibliotek",
+      searchPlaceholder: "Hvad har du lyst til at lytte til?",
+      library: "BIBLIOTEK",
+      account: "KONTO"
+    }
+  };
+
+  let currentLang = localStorage.getItem('musix-lang') || 'en';
+
+  function applyLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('musix-lang', lang);
+  
+  const t = translations[lang];
+  
+  // Update all elements with data-i18n attributes
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) {
+      el.textContent = t[key];
+    }
+  });
+  
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (t[key]) {
+      el.placeholder = t[key];
+    }
+  });
+  
+  // Update language chips in Settings
+  document.querySelectorAll('.lang-chip').forEach(chip => {
+    chip.classList.toggle('active', chip.dataset.lang === lang);
+  });
+  
+  // Update navbar language buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
+
+// Language chip event listeners (Settings)
+const langChips = document.querySelectorAll('.lang-chip');
+if (langChips && langChips.length) {
+  langChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const lang = chip.dataset.lang;
+      applyLanguage(lang);
+    });
+  });
+}
+
+const langBtns = document.querySelectorAll('.lang-btn');
+if (langBtns && langBtns.length) {
+  langBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      applyLanguage(lang);
+    });
+  });
+}
+
+applyLanguage(currentLang);
+
   const API_BASE = 'http://127.0.0.1:8000/api';
 
   const homeTab = document.getElementById('homeTab');
@@ -145,7 +423,7 @@ async function openPlaylist(id) {
 async function addSongToCurrentPlaylist(songId) {
   if (!selectedPlaylistId) return;
 
-  await fetch(`${API_BASE}/playlists/${selectedPlaylistId}/add-song`, {
+  await fetch(`${API_BASE}/playlists/${selectedPlaylistId}/add-song`, { 
     method: "POST",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
@@ -261,7 +539,8 @@ document.getElementById("deletePlaylistBtn").addEventListener("click", async () 
   function renderSongs(list = []) {
     songListContainer.innerHTML = '';
     if (!list.length) {
-      songListContainer.innerHTML = '<p class="muted">No songs in your library.</p>';
+      const t = translations[currentLang];
+      songListContainer.innerHTML = `<p class="muted" data-i18n="noSongs">${t.noSongs}</p>`;
       return;
     }
 
@@ -380,7 +659,8 @@ document.getElementById("deletePlaylistBtn").addEventListener("click", async () 
     activeRow?.classList.add('active');
 
     audioElem.src = s.url || '';
-    playerSongTitle.textContent = s.title || 'No song selected';
+    const t = translations[currentLang];
+    playerSongTitle.textContent = s.title || t.noSongSelected;
     playerSongArtist.textContent = s.artist || '—';
     timeCurrent.textContent = '0:00';
     timeTotal.textContent = formatDuration(parseDurationToSeconds(s.duration || 0));
@@ -704,3 +984,4 @@ document.getElementById("deletePlaylistBtn").addEventListener("click", async () 
     await renderPlaylistsSidebar();
     showHomeView();
   })();
+});
