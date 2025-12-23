@@ -27,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
       here: "here",
       noSongSelected: "No song selected",
       
+      songs: "SONGS",
+      noDuration: "NO DURATION",
+
       // Buttons
       addSong: "+ Add Song",
       saveSong: "Save song",
@@ -96,7 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // Stats view
       libraryStats: "Library stats",
       statsOverview: "Overview of your songs, favorites, genres and artists.",
-      allTime: "All time"
+      allTime: "All time",
+
+      playlistsBadge: "Playlist",
+      noPlaylists:"You haven't created any playlists yet."
     },
     dk: {
       // Navigation
@@ -125,6 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
       url: "Sang URL (MP3 link)",
       name: "Navn",
       description: "Beskrivelse",
+
+      songs: "SANGE",
+      noDuration: "INGEN VARIGHED",
       
       // Messages
       noSongs: "Ingen sange i dit bibliotek.",
@@ -215,7 +224,10 @@ document.addEventListener('DOMContentLoaded', () => {
       yourMusixLibrary: "Dit Musix Bibliotek",
       searchPlaceholder: "Hvad har du lyst til at lytte til?",
       library: "BIBLIOTEK",
-      account: "KONTO"
+      account: "KONTO",
+
+      playlistsBadge: "AFSPILNINGSLISTER",
+      noPlaylists:"Du har ikke oprettet nogen afspilningslister endnu."
     }
   };
 
@@ -277,7 +289,7 @@ if (langBtns && langBtns.length) {
 
 applyLanguage(currentLang);
 
-  const API_BASE = 'http://127.0.0.1:8000/api';
+  const API_BASE = 'http://127.0.0.1:8001/api';
 
   const homeTab = document.getElementById('homeTab');
   const favoritesTab = document.getElementById('favoritesTab');
@@ -743,7 +755,8 @@ document.getElementById("deletePlaylistBtn").addEventListener("click", async () 
     await loadPlaylists();
 
     if (!playlists.length) {
-      playlistsList.innerHTML = '<p class="empty-playlists-message">You haven’t created any playlists yet.</p>';
+      const t = translations[currentLang];
+      playlistsList.innerHTML = `<p class="empty-playlists-message" data-i18n="noPlaylists">${t.noPlaylists}</p>`;
       return;
     }
 
